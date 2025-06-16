@@ -15,7 +15,7 @@ function generateRoomId(length = 8) {
 document.getElementById('createGroupBtn').addEventListener('click', () => {
     alert ("Cada grupo que criar terá um link único")
     const newRoomId = generateRoomId();
-    const newUrl = `${window.location.origin}/teste-chat-frontend-nlzw.onrender?room=${newRoomId}`;
+    const newUrl = `${window.location.origin}?room=${newRoomId}`;
     window.open(newUrl, '_blank'); // <-- Abre em nova aba
 });
 
