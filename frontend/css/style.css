@@ -700,7 +700,7 @@ button:hover {
 /* ==================== RESPONSIVIDADE ==================== */
 
 /* Para celulares (<= 480px) */
-@media (max-width: 480px) {
+@media (max-width: 700px) {
   body {
     font-size: 14px;
   }
