@@ -1,5 +1,4 @@
 import { login, cadastrarInfo, cadastrarEmail, auth, fs } from "./firebase.js";
-import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js";
 import { startVideoCall, handleVideoOffer, handleVideoAnswer, handleIceCandidate, initVideoCallModule } from './call.js';
 import { createMessageSelfElement, createMessageOtherElement } from "./messages.js"
 
@@ -64,10 +63,6 @@ const colors = [
     "cyan",
     "firebrick"
 ]
-
-const rtcConfig = {
-    iceServers: [{ urls: "stun:stun.l.google.com:19302" }] // servidor STUN gratuito
-};
 
 document.getElementById('showRegister').addEventListener('click', function(e) {
   e.preventDefault();
@@ -221,54 +216,6 @@ socket.addEventListener('message', async (event) => {
         scrollScreen();
     }
 });
-
-const socialLinksForm = document.getElementById('socialLinksForm');
-const savedSocialLinks = document.getElementById('savedSocialLinks');
-
-auth.onAuthStateChanged(async (user) => {
-    if (user) {
-        const userDocRef = doc(fs, "usuarios", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
-
-        let nome = "";
-
-        if (userDocSnap.exists()) {
-            nome = userDocSnap.data().nome;
-        } else {
-            // Se o nome não existir, pedir via prompt ou modal
-            nome = prompt("Qual é o seu nome?");
-            if (nome) {
-                await setDoc(userDocRef, { nome });
-            } else {
-                nome = "Anônimo";
-            }
-        }
-
-        // agora sim use esse nome
-        user.name = nome;
-
-        // exemplo:
-        await salvarLinksSociais(user.uid, { instagram: "...", github: "..." }, nome);
-    }
-});
-
-// Carregar e exibir os links de todos
-async function carregarTodosLinksSociais() {
-    const dados = await obterTodosLinksSociais();
-
-    savedSocialLinks.innerHTML = "<h4>Redes de todos os usuários</h4>";
-
-    for (const [userId, links] of Object.entries(dados)) {
-        savedSocialLinks.innerHTML += `
-            <div style="margin-bottom: 10px;">
-                <strong>Usuário:</strong> ${links.nome || userId.slice(0, 6)}<br/>
-                ${links.instagram ? `<a href="${links.instagram}" target="_blank">Instagram</a><br/>` : ""}
-                ${links.linkedin ? `<a href="${links.linkedin}" target="_blank">LinkedIn</a><br/>` : ""}
-                ${links.github ? `<a href="${links.github}" target="_blank">GitHub</a><br/>` : ""}
-            </div>
-        `;
-    }
-}
 
 const loginButton = document.querySelector(".login__button");
 const loginError = document.querySelector(".login-error");

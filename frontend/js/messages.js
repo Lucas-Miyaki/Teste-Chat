@@ -1,4 +1,4 @@
-export const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
+const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
     
     const div = document.createElement("div");
     div.classList.add("message--self");
@@ -72,7 +72,7 @@ export const createMessageSelfElement = (content, image, gif, audio, video, file
     return div;
 };
 
-export const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
+const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
     const div = document.createElement("div");
     const span = document.createElement("span");
 
@@ -96,7 +96,10 @@ export const createMessageOtherElement = (content, sender, senderColor, image, g
 
 
     div.appendChild(span);
-    div.innerHTML += content;
+
+    const contentDiv = document.createElement("div");
+    contentDiv.innerHTML = content;
+    div.appendChild(contentDiv);
 
     if (image) {
         const img = document.createElement("img");
@@ -152,3 +155,5 @@ export const createMessageOtherElement = (content, sender, senderColor, image, g
     
     return div;
 };
+
+export {createMessageSelfElement, createMessageOtherElement};

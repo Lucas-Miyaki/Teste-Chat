@@ -1,35 +1,19 @@
-const gallery = document.getElementById("imageGallery");
-const uploads = document.getElementById("uploadFields");
-const coloring = document.getElementById("changeColor");
-const audio = document.getElementById('audioPreview');
+function toggleSection(sectionId) {
+    const sections = {
+        imageGallery: "block",
+        uploadFields: "block",
+    };
 
+    for (const id in sections) {
+        const section = document.getElementById(id);
+        if (!section) continue;
 
-function toggleGallery() {
-    gallery.style.display = gallery.style.display === "none" ? "flex" : "none";
-    uploads.style.display = "none";
-    coloring.style.display = "none";
-    audio.style.display = "none";
-}
-
-function toggleUploads() {
-    uploads.style.display = uploads.style.display === "none" ? "block" : "none";
-    gallery.style.display = "none";
-    coloring.style.display = "none";
-    audio.style.display = "none";
-}
-
-function toggleColors() {
-    coloring.style.display = coloring.style.display === "none" ? "block" : "none";
-    gallery.style.display = "none";
-    uploads.style.display = "none";
-    audio.style.display = "none";
-}
-
-function revealAudio() {
-    audio.style.display = audio.style.display === "none" ? "block" : "none";
-    gallery.style.display = "none";
-    uploads.style.display = "none";
-    coloring.style.display = "none";
+        if (id === sectionId) {
+            section.style.display = section.style.display === "none" ? sections[id] : "none";
+        } else {
+            section.style.display = "none";
+        }
+    }
 }
 
 // Figurinhas
@@ -41,7 +25,7 @@ function selectSiteImage(url) {
 // Upload Imagens
 let selectedImageBase64 = null;
 
-var loadFile = function(event) {
+function loadFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     const image = document.getElementById('output');
@@ -51,8 +35,11 @@ var loadFile = function(event) {
         image.src = selectedImageBase64;
     };
 
-    reader.readAsDataURL(file);
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 };
+
 // Upload Audio
 let selectedAudioBase64 = null;
 

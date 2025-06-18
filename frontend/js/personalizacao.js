@@ -94,26 +94,23 @@ function atualizarPreview() {
 }
 
 // === LISTENERS PARA CORES DO SITE ===
-document.getElementById("backgroundColorPicker").addEventListener("change", (e) => {
+document.getElementById("fundo-chat").addEventListener("change", (e) => {
     const value = e.target.value;
     document.documentElement.style.setProperty("--background-color", value);
     localStorage.setItem("background-color", value);
 });
 
-document.getElementById("textColorPicker").addEventListener("change", (e) => {
+document.getElementById("cor-texto").addEventListener("change", (e) => {
     const value = e.target.value;
     document.documentElement.style.setProperty("--text-color", value);
     localStorage.setItem("text-color", value);
 });
 
-document.getElementById("primaryColorPicker").addEventListener("change", (e) => {
+document.getElementById("cor-fundo-msg").addEventListener("change", (e) => {
     const value = e.target.value;
     document.documentElement.style.setProperty("--primary-color", value);
     localStorage.setItem("primary-color", value);
 });
-
-// === BOTÃO APLICAR PERSONALIZAÇÃO ===
-document.getElementById("aplicar-personalizacao").addEventListener("click", atualizarPreview);
 
 // === MONITORAMENTO DE INPUTS ===
 const inputs = [
