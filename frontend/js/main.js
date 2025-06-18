@@ -13,7 +13,7 @@ let onlineUsersCache = [];
 let currentRoom = room;
 const url = window.location.href;
 const tempo = new Date().toLocaleTimeString([], { hour:"2-digit", minute:"2-digit"});
-const ADMINS = ['1@gmail.com', 'admin2@teste.com'];
+const ADMINS = ['1@gmail.com', 'admin@gmail.com'];
 let userEmail = ''; // vai armazenar o email logado
 
 initVideoCallModule(socket, user);
@@ -152,7 +152,6 @@ socket.addEventListener('message', async (event) => {
                 });
                 li.appendChild(banBtn);
             }
-
             listContainer.appendChild(li);
         });
 
@@ -259,9 +258,8 @@ document.getElementById("avisoForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const aviso = document.getElementById("avisoInput").value.trim();
-    const tempo = parseInt(document.getElementById("avisoTempo").value.trim());
 
-    if (!aviso || isNaN(tempo)) return;
+    if (!aviso) return;
 
     socket.send(JSON.stringify({
         type: 'aviso',
@@ -270,7 +268,6 @@ document.getElementById("avisoForm").addEventListener("submit", (e) => {
     }));
 
     document.getElementById("avisoInput").value = "";
-    document.getElementById("avisoTempo").value = "10";
 });
 
 document.querySelectorAll('.sidebar button').forEach(button => {

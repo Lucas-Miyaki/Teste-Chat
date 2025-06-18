@@ -307,7 +307,7 @@ a {
     display: flex;
 }
 
-.chat__tools button {
+.chat__tools button, #aviso-btn {
     padding: 10px;
     background-color: #333;
     color: var(--text-color);
@@ -367,8 +367,9 @@ button:hover {
   font-size: 30px;
   align-self: flex-end;
   background-color: #121212;
-  margin-top: 470px;
-  margin-right: 10%;
+  margin-top: 40%;
+  margin-right: 15%;
+  position: fixed;
 }
 
 #emojiPicker {
@@ -395,7 +396,7 @@ button:hover {
 }
 
 /* Container para os usuários online e botão */
-#panel-usuarios, #panel-ligacao, #panel-rede,  #panel-avisos, #panel-assinatura, #panel-personalizacao{
+#panel-usuarios, #panel-ligacao, #panel-rede,  #panel-avisos, #panel-assinatura, #panel-personalizacao, #panel-posts, #panel-publicacoes, #panel-traducao, #panel-passatempos, #panel-agendar{
   position: fixed;
   top: 48px;
   right: 56px;
@@ -409,7 +410,7 @@ button:hover {
 }
 
 /* Título */
-#panel-usuarios h3, #panel-ligacao h3, #panel-rede h3, #panel-avisos h3, #panel-assinatura h3, #panel-personalizacao h3{
+#panel-usuarios h3, #panel-ligacao h3, #panel-rede h3, #panel-avisos h3, #panel-assinatura h3, #panel-personalizacao h3, #panel-posts h3, #panel-publicacoes h3, #panel-traducao h3, #panel-passatempos h3, #panel-agendar h3{
   margin-top: 0;
   font-size: 1.1em;
   color: var(--text-color);
@@ -719,7 +720,7 @@ button:hover {
     flex-direction: column;
   }
 
-  #panel-usuarios, #panel-ligacao, #panel-rede,  #panel-avisos, #panel-assinatura, #panel-personalizacao {
+  #panel-usuarios, #panel-ligacao, #panel-rede,  #panel-avisos, #panel-assinatura, #panel-personalizacao, #panel-posts, #panel-publicacoes, #panel-traducao, #panel-passatempos, #panel-agendar{
     max-width: 80%;
     margin-left: 10px;
   }
