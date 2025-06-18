@@ -19,7 +19,7 @@ const paddingMsg = document.getElementById('paddingMsg');
 const imagemFundoChat = document.getElementById('imagemFundoChat');
 
 const chatPrincipal = document.querySelector('.site');
-const mensagensPreview = previewChat?.querySelectorAll('.message') || [];
+const mensagensPreview = document.querySelectorAll('.message') || [];
 
 // === SALVA PERSONALIZAÇÕES ===
 function salvarPersonalizacao() {
@@ -140,3 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
     botaoAbaChat.addEventListener("click", atualizarPreview);
   }
 });
+
+aplicarTemaGlobal();
+atualizarPreview();
