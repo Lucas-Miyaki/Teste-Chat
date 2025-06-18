@@ -2,7 +2,7 @@ import { login, cadastrarInfo, cadastrarEmail, auth, fs } from "./firebase.js";
 import { startVideoCall, handleVideoOffer, handleVideoAnswer, handleIceCandidate, initVideoCallModule } from './call.js';
 import { createMessageSelfElement, createMessageOtherElement } from "./messages.js"
 
-const socket = new WebSocket('wss://teste-chat-backend.onrender.com');
+const socket = new WebSocket('ws://localhost:8080');
 
 const urlParams = new URLSearchParams(window.location.search);
 const room = urlParams.get('room') || 'default-room';
@@ -13,8 +13,7 @@ let onlineUsersCache = [];
 let currentRoom = room;
 const url = window.location.href;
 
-const tempo = new Date().toLocaleTimeString([], { hour:"2-digit", minute:"2-digit"});
-const dataAgora = new Date().toLocaleDateString([], { day: "2-digit", month: "2-digit", year: "numeric"});
+const tempo = new Date().toLocaleString([], { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
 const ADMINS = ['1@gmail.com', 'admin@gmail.com'];
 let userEmail = ''; // vai armazenar o email logado
@@ -195,11 +194,11 @@ socket.addEventListener('message', async (event) => {
         avisosList.appendChild(li);
 
     } else if (msg.type === "message") {
-        const { userId, userName, userColor, content, image, gif, audio, video, file, fileName, timestamp, datestamp, } = msg;
+        const { userId, userName, userColor, content, image, gif, audio, video, file, fileName, timestamp, } = msg;
 
         const message = userId === user.id
-            ? createMessageSelfElement(content, image, gif, audio, video, file, fileName, timestamp, datestamp, msg.privateTo)
-            : createMessageOtherElement(content, userName, userColor, image, gif, audio, video, file, fileName, timestamp, datestamp, msg.privateTo);
+            ? createMessageSelfElement(content, image, gif, audio, video, file, fileName, timestamp, msg.privateTo)
+            : createMessageOtherElement(content, userName, userColor, image, gif, audio, video, file, fileName, timestamp, msg.privateTo);
 
         chatMessages.appendChild(message);
         scrollScreen();
@@ -383,8 +382,7 @@ const sendMessage = (event) => {
         video: selectedVideoBase64,
         file: selectedGenericFile,
         fileName: selectedGenericFileName,
-        timestamp: new Date().toLocaleTimeString([], { hour:"2-digit", minute:"2-digit"}),
-        datestamp: new Date().toLocaleDateString([], { day: "2-digit", month: "2-digit", year: "numeric"}),
+        timestamp: new Date().toLocaleString([], { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }),
         privateTo: selectedPrivateRecipient?.id || null
     };
 
@@ -414,6 +412,6 @@ const sendMessage = (event) => {
 
 chatForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    await cadastrarInfo(user.name, user.id, chatInput.value, url, tempo, dataAgora);
+    await cadastrarInfo(user.name, user.id, chatInput.value, url, tempo);
     sendMessage(event);
 });

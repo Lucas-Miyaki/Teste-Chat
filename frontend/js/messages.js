@@ -1,4 +1,4 @@
-export const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, datestamp, privateTo) => {
+export const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
     
     const div = document.createElement("div");
     div.classList.add("message--self");
@@ -10,14 +10,6 @@ export const createMessageSelfElement = (content, image, gif, audio, video, file
     time.style.display = "block";
     time.style.fontSize = "0.8em";
     time.style.color = "#888";
-
-    const date = document.createElement("span");
-    date.classList.add("message--datestamp");
-    date.textContent = datestamp;
-    date.style.display = "flex";
-    date.style.fontSize = "0.8em";
-    date.style.color = "#888";
-    date.style.alignSelf = "flex-end";
 
     if (privateTo && privateTo !== null) {
         content = `<strong>[Privado para ${selectedPrivateRecipient.name}]</strong> ` + content;
@@ -75,7 +67,6 @@ export const createMessageSelfElement = (content, image, gif, audio, video, file
     }
 
     div.appendChild(time);
-    div.appendChild(date);
     
     if (typeof aplicarEstiloMensagens === "function") {
         aplicarEstiloMensagens([div]);
@@ -83,7 +74,7 @@ export const createMessageSelfElement = (content, image, gif, audio, video, file
     return div;
 };
 
-export const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, datestamp, privateTo) => {
+export const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
     const div = document.createElement("div");
     const span = document.createElement("span");
 
@@ -93,14 +84,6 @@ export const createMessageOtherElement = (content, sender, senderColor, image, g
     time.style.display = "block";
     time.style.fontSize = "0.8em";
     time.style.color = "#888";
-
-    const date = document.createElement("span");
-    date.classList.add("message--datestamp");
-    date.textContent = datestamp;
-    date.style.display = "flex";
-    date.style.fontSize = "0.8em";
-    date.style.color = "#888";
-    date.style.alignSelf = "flex-end";
 
     div.classList.add("message--other");
     div.classList.add("message");
@@ -166,7 +149,7 @@ export const createMessageOtherElement = (content, sender, senderColor, image, g
         div.appendChild(fileLink);
     }
     div.appendChild(time);
-    div.appendChild(date);
+
     if (typeof aplicarEstiloMensagens === "function") {
         aplicarEstiloMensagens([div]);
     }

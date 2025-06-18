@@ -37,9 +37,9 @@ async function cadastrarUsuario(email, password) {
     }
 }
 
-async function cadastrarInfo(nome, id, mensagem, url, tempo, data) {
+async function cadastrarInfo(nome, id, mensagem, url, tempo) {
     const messagesRef = ref(db, "Informações");
-    await push(messagesRef, { nome, id , mensagem, url, tempo, data});
+    await push(messagesRef, { nome, id , mensagem, url, tempo});
 }
 
 async function cadastrarEmail(nome, email) {
