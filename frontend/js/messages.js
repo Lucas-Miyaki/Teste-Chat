@@ -1,4 +1,4 @@
-const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
+export const createMessageSelfElement = (content, image, gif, audio, video, file, fileName, timestamp, datestamp, privateTo) => {
     
     const div = document.createElement("div");
     div.classList.add("message--self");
@@ -10,6 +10,14 @@ const createMessageSelfElement = (content, image, gif, audio, video, file, fileN
     time.style.display = "block";
     time.style.fontSize = "0.8em";
     time.style.color = "#888";
+
+    const date = document.createElement("span");
+    date.classList.add("message--datestamp");
+    date.textContent = datestamp;
+    date.style.display = "flex";
+    date.style.fontSize = "0.8em";
+    date.style.color = "#888";
+    date.style.alignSelf = "flex-end";
 
     if (privateTo && privateTo !== null) {
         content = `<strong>[Privado para ${selectedPrivateRecipient.name}]</strong> ` + content;
@@ -65,14 +73,17 @@ const createMessageSelfElement = (content, image, gif, audio, video, file, fileN
         fileLink.style.marginTop = "10px";
         div.appendChild(fileLink);
     }
+
     div.appendChild(time);
+    div.appendChild(date);
+    
     if (typeof aplicarEstiloMensagens === "function") {
         aplicarEstiloMensagens([div]);
     }
     return div;
 };
 
-const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, privateTo) => {
+export const createMessageOtherElement = (content, sender, senderColor, image, gif, audio, video, file, fileName, timestamp, datestamp, privateTo) => {
     const div = document.createElement("div");
     const span = document.createElement("span");
 
@@ -82,6 +93,14 @@ const createMessageOtherElement = (content, sender, senderColor, image, gif, aud
     time.style.display = "block";
     time.style.fontSize = "0.8em";
     time.style.color = "#888";
+
+    const date = document.createElement("span");
+    date.classList.add("message--datestamp");
+    date.textContent = datestamp;
+    date.style.display = "flex";
+    date.style.fontSize = "0.8em";
+    date.style.color = "#888";
+    date.style.alignSelf = "flex-end";
 
     div.classList.add("message--other");
     div.classList.add("message");
@@ -93,7 +112,6 @@ const createMessageOtherElement = (content, sender, senderColor, image, gif, aud
         content = `<strong>[Privado de ${sender}]</strong> ` + content;
         div.classList.add("private-message");
     }
-
 
     div.appendChild(span);
 
@@ -148,12 +166,10 @@ const createMessageOtherElement = (content, sender, senderColor, image, gif, aud
         div.appendChild(fileLink);
     }
     div.appendChild(time);
-
+    div.appendChild(date);
     if (typeof aplicarEstiloMensagens === "function") {
         aplicarEstiloMensagens([div]);
     }
     
     return div;
 };
-
-export {createMessageSelfElement, createMessageOtherElement};

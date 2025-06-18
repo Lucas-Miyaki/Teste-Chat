@@ -300,6 +300,13 @@ a {
     margin-top: 5px;
 }
 
+.message--datestamp {
+    font-size: 0.75em;
+    color: #666;
+    margin-top: 15px;
+    align-self: flex-end;
+}
+
 .chat__tools {
     display: flex;
     gap: 10px;

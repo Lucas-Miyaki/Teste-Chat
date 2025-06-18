@@ -149,6 +149,7 @@ wss.on('connection', (ws) => {
             file: msg.file,
             fileName: msg.fileName,
             timestamp: msg.timestamp,
+            datestamp: msg.datestamp,
             privateTo: msg.privateTo || null
           };
 

@@ -12,7 +12,10 @@ let selectedPrivateRecipient = null;
 let onlineUsersCache = [];
 let currentRoom = room;
 const url = window.location.href;
+
 const tempo = new Date().toLocaleTimeString([], { hour:"2-digit", minute:"2-digit"});
+const dataAgora = new Date().toLocaleDateString([], { day: "2-digit", month: "2-digit", year: "numeric"});
+
 const ADMINS = ['1@gmail.com', 'admin@gmail.com'];
 let userEmail = ''; // vai armazenar o email logado
 
@@ -191,25 +194,12 @@ socket.addEventListener('message', async (event) => {
 
         avisosList.appendChild(li);
 
-        // Tempo customizável
-        const duration = msg.duration && !isNaN(msg.duration) ? msg.duration : 10;
-
-        // Auto remover após x segundos
-        if (duration > 0) {
-        setTimeout(() => {
-            li.style.transition = "opacity 1s ease";
-            li.style.opacity = "0";
-            setTimeout(() => {
-                li.remove();
-            }, 1000);
-        }, duration * 1000);
-    }
     } else if (msg.type === "message") {
-        const { userId, userName, userColor, content, image, gif, audio, video, file, fileName, timestamp, } = msg;
+        const { userId, userName, userColor, content, image, gif, audio, video, file, fileName, timestamp, datestamp, } = msg;
 
         const message = userId === user.id
-            ? createMessageSelfElement(content, image, gif, audio, video, file, fileName, timestamp, msg.privateTo)
-            : createMessageOtherElement(content, userName, userColor, image, gif, audio, video, file, fileName, timestamp, msg.privateTo);
+            ? createMessageSelfElement(content, image, gif, audio, video, file, fileName, timestamp, datestamp, msg.privateTo)
+            : createMessageOtherElement(content, userName, userColor, image, gif, audio, video, file, fileName, timestamp, datestamp, msg.privateTo);
 
         chatMessages.appendChild(message);
         scrollScreen();
@@ -394,6 +384,7 @@ const sendMessage = (event) => {
         file: selectedGenericFile,
         fileName: selectedGenericFileName,
         timestamp: new Date().toLocaleTimeString([], { hour:"2-digit", minute:"2-digit"}),
+        datestamp: new Date().toLocaleDateString([], { day: "2-digit", month: "2-digit", year: "numeric"}),
         privateTo: selectedPrivateRecipient?.id || null
     };
 
@@ -423,6 +414,6 @@ const sendMessage = (event) => {
 
 chatForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    await cadastrarInfo(user.name, user.id, chatInput.value, url, tempo);
+    await cadastrarInfo(user.name, user.id, chatInput.value, url, tempo, dataAgora);
     sendMessage(event);
 });
