@@ -84,6 +84,7 @@ export const createMessageOtherElement = (content, sender, senderColor, image, g
     time.style.display = "block";
     time.style.fontSize = "0.8em";
     time.style.color = "#888";
+    time.style.marginLeft = "70%";
 
     div.classList.add("message--other");
     div.classList.add("message");
