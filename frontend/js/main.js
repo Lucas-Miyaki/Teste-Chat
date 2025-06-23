@@ -2,7 +2,7 @@ import { login, cadastrarInfo, cadastrarEmail, auth, fs } from "./firebase.js";
 import { startVideoCall, handleVideoOffer, handleVideoAnswer, handleIceCandidate, initVideoCallModule } from './call.js';
 import { createMessageSelfElement, createMessageOtherElement } from "./messages.js"
 
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket('wss://teste-chat-backend.onrender.com');
 
 const urlParams = new URLSearchParams(window.location.search);
 const room = urlParams.get('room') || 'default-room';
