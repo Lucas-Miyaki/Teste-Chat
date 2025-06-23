@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
-const fs = getFirestore(app)
+const fs = getFirestore(app);
 // Cadastrar e Logar
 
 async function login(email, password) {

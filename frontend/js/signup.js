@@ -1,7 +1,5 @@
 import { cadastrarUsuario } from "./firebase.js";
 
-const signup = document.querySelector(".signup");
-
 const signupButton = document.querySelector(".signup__button");
 const signupError = document.querySelector(".signup-error");
 
