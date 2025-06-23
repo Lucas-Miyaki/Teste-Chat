@@ -1147,14 +1147,14 @@ button:hover {
 
   @media (min-width: 600px) {
     input.cell {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
+      width: 30px;
+      height: 30px;
+      font-size: 15px;
     }
 
     #keyboard button {
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       font-size: 16px;
     }
   }
